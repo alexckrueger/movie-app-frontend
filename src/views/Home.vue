@@ -47,7 +47,7 @@ export default {
     },
     destroyMovie: function () {
       axios.delete("http://localhost:3000/movies/" + this.index).then((response) => console.log(response));
-    }
+    },
   },
 };
 </script>
