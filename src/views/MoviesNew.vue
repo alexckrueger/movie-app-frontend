@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      movie: {},
+      movie: { plot: "" },
       errors: [],
     };
   },
@@ -42,6 +42,15 @@ export default {
       Plot:
       <input type="text" v-model="movie.plot" />
     </p>
+    <small v-if="movie.plot.length < 141">{{ 140 - movie.plot.length }} characters remaining</small>
+    <small id="red" v-if="movie.plot.length > 140">{{ movie.plot.length - 140 }} characters too many!!</small>
+    <br />
     <button v-on:click="createMovie()">Update Movie</button>
   </div>
 </template>
+
+<style>
+#red {
+  color: red;
+}
+</style>
