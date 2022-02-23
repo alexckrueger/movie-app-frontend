@@ -30,6 +30,8 @@ export default {
     <ul v-for="genre in movie.genres" v-bind:key="genre">
       <li>{{ genre.name }}</li>
     </ul>
+    <a style="background-color: yellow" :href="`https://letmegooglethat.com/?q=${movie.title}`">More Information</a>
+    <br />
     <button v-on:click="movieEditPage">Edit Movie</button>
   </div>
 </template>
