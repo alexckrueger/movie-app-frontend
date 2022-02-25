@@ -35,26 +35,43 @@ export default {
 
 <template>
   <div class="movies-index">
-    <div>
-      Search by Title or Director:
-      <input style="background-color: SlateBlue" type="text" v-model="titleFilter" list="movietitles" />
-      <datalist id="movietitles">
-        <option v-for="movie in filteredMovies" v-bind:key="movie.id">{{ movie.title }}</option>
-      </datalist>
-    </div>
-    <button style="background-color: DodgerBlue" v-on:click="synth.triggerAttackRelease('C4', '8n')">
-      This is supposed to play music :(
-    </button>
-    <transition-group
-      appear
-      enter-active-class="animate__animated animate__backInDown"
-      leave-active-class="animate__animated animate__backOutUp"
-    >
-      <div v-for="movie in filteredMovies" v-bind:key="movie.id">
-        <h2 style="background-color: crimson">{{ movie.title }}</h2>
-        <p>Directed by {{ movie.director }}</p>
-        <button style="background-color: chocolate" v-on:click="movieShowPage(movie)">More Info</button>
+    <div class="container">
+      <div class="input-group mb-3 mt-3">
+        <span class="input-group-text">Search</span>
+        <input type="text" class="form-control" v-model="titleFilter" list="movietitles" />
+        <datalist id="movietitles">
+          <option v-for="movie in filteredMovies" v-bind:key="movie.id">{{ movie.title }}</option>
+        </datalist>
       </div>
-    </transition-group>
+      <button class="btn btn-danger disabled mb-3" v-on:click="synth.triggerAttackRelease('C4', '8n')">
+        This is supposed to play music :(
+      </button>
+      <transition-group
+        appear
+        enter-active-class="animate__animated animate__backInDown"
+        leave-active-class="animate__animated animate__backOutUp"
+      >
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <div class="col" v-for="movie in filteredMovies" v-bind:key="movie.id">
+            <div class="card" style="width: 18rem">
+              <img src="https://www.placecage.com/c/460/300" class="card-img-top" />
+              <div class="card-body">
+                <h5 class="card-title">{{ movie.title }}</h5>
+                <p class="card-text text-truncate">
+                  {{ movie.plot }}
+                </p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Directed by {{ movie.director }}</li>
+                <li class="list-group-item">{{ movie.year }}</li>
+              </ul>
+              <div class="card-body">
+                <button class="btn btn-success" v-on:click="movieShowPage(movie)">More Info</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition-group>
+    </div>
   </div>
 </template>
